@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7596BBB51C596C54005F5BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BBB41C596C54005F5BAE /* AppDelegate.swift */; };
+		7596BBB71C596C54005F5BAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7596BBB61C596C54005F5BAE /* Assets.xcassets */; };
+		7596BBBA1C596C54005F5BAE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7596BBB81C596C54005F5BAE /* MainMenu.xib */; };
+		7596BBC21C5977CC005F5BAE /* JobsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BBC11C5977CC005F5BAE /* JobsDB.swift */; };
+		7596BBC41C597854005F5BAE /* JobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BBC31C597854005F5BAE /* JobsController.swift */; };
+		7596BBD01C597F04005F5BAE /* JobsTerminals.m in Sources */ = {isa = PBXBuildFile; fileRef = 7596BBCF1C597F04005F5BAE /* JobsTerminals.m */; };
+		7596BBD11C5980CB005F5BAE /* JobsScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BBC51C5979BF005F5BAE /* JobsScheduler.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7596BBB11C596C54005F5BAE /* jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7596BBB41C596C54005F5BAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7596BBB61C596C54005F5BAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7596BBB91C596C54005F5BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7596BBBB1C596C54005F5BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7596BBC11C5977CC005F5BAE /* JobsDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsDB.swift; sourceTree = "<group>"; };
+		7596BBC31C597854005F5BAE /* JobsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsController.swift; sourceTree = "<group>"; };
+		7596BBC51C5979BF005F5BAE /* JobsScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsScheduler.swift; sourceTree = "<group>"; };
+		7596BBC81C597A8F005F5BAE /* iTerm2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTerm2.h; sourceTree = "<group>"; };
+		7596BBC91C597A8F005F5BAE /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
+		7596BBCA1C597AA8005F5BAE /* jobs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jobs-Bridging-Header.h"; sourceTree = "<group>"; };
+		7596BBCE1C597F04005F5BAE /* JobsTerminals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobsTerminals.h; sourceTree = "<group>"; };
+		7596BBCF1C597F04005F5BAE /* JobsTerminals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobsTerminals.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7596BBAE1C596C54005F5BAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7596BBA81C596C54005F5BAE = {
+			isa = PBXGroup;
+			children = (
+				7596BBB31C596C54005F5BAE /* jobs */,
+				7596BBB21C596C54005F5BAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7596BBB21C596C54005F5BAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7596BBB11C596C54005F5BAE /* jobs.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7596BBB31C596C54005F5BAE /* jobs */ = {
+			isa = PBXGroup;
+			children = (
+				7596BBC71C597A8F005F5BAE /* scripting */,
+				7596BBB41C596C54005F5BAE /* AppDelegate.swift */,
+				7596BBB61C596C54005F5BAE /* Assets.xcassets */,
+				7596BBB81C596C54005F5BAE /* MainMenu.xib */,
+				7596BBBB1C596C54005F5BAE /* Info.plist */,
+				7596BBC11C5977CC005F5BAE /* JobsDB.swift */,
+				7596BBC31C597854005F5BAE /* JobsController.swift */,
+				7596BBC51C5979BF005F5BAE /* JobsScheduler.swift */,
+				7596BBCA1C597AA8005F5BAE /* jobs-Bridging-Header.h */,
+				7596BBCE1C597F04005F5BAE /* JobsTerminals.h */,
+				7596BBCF1C597F04005F5BAE /* JobsTerminals.m */,
+			);
+			path = jobs;
+			sourceTree = "<group>";
+		};
+		7596BBC71C597A8F005F5BAE /* scripting */ = {
+			isa = PBXGroup;
+			children = (
+				7596BBC81C597A8F005F5BAE /* iTerm2.h */,
+				7596BBC91C597A8F005F5BAE /* Terminal.h */,
+			);
+			path = scripting;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7596BBB01C596C54005F5BAE /* jobs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7596BBBE1C596C54005F5BAE /* Build configuration list for PBXNativeTarget "jobs" */;
+			buildPhases = (
+				7596BBAD1C596C54005F5BAE /* Sources */,
+				7596BBAE1C596C54005F5BAE /* Frameworks */,
+				7596BBAF1C596C54005F5BAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jobs;
+			productName = jobs;
+			productReference = 7596BBB11C596C54005F5BAE /* jobs.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7596BBA91C596C54005F5BAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Chocolat;
+				TargetAttributes = {
+					7596BBB01C596C54005F5BAE = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 7596BBAC1C596C54005F5BAE /* Build configuration list for PBXProject "jobs" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7596BBA81C596C54005F5BAE;
+			productRefGroup = 7596BBB21C596C54005F5BAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7596BBB01C596C54005F5BAE /* jobs */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7596BBAF1C596C54005F5BAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7596BBB71C596C54005F5BAE /* Assets.xcassets in Resources */,
+				7596BBBA1C596C54005F5BAE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7596BBAD1C596C54005F5BAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7596BBD11C5980CB005F5BAE /* JobsScheduler.swift in Sources */,
+				7596BBC41C597854005F5BAE /* JobsController.swift in Sources */,
+				7596BBD01C597F04005F5BAE /* JobsTerminals.m in Sources */,
+				7596BBB51C596C54005F5BAE /* AppDelegate.swift in Sources */,
+				7596BBC21C5977CC005F5BAE /* JobsDB.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7596BBB81C596C54005F5BAE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7596BBB91C596C54005F5BAE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7596BBBC1C596C54005F5BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7596BBBD1C596C54005F5BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7596BBBF1C596C54005F5BAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = jobs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chocolatapp.jobs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "jobs/jobs-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7596BBC01C596C54005F5BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = jobs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chocolatapp.jobs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "jobs/jobs-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7596BBAC1C596C54005F5BAE /* Build configuration list for PBXProject "jobs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7596BBBC1C596C54005F5BAE /* Debug */,
+				7596BBBD1C596C54005F5BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7596BBBE1C596C54005F5BAE /* Build configuration list for PBXNativeTarget "jobs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7596BBBF1C596C54005F5BAE /* Debug */,
+				7596BBC01C596C54005F5BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7596BBA91C596C54005F5BAE /* Project object */;
+}
