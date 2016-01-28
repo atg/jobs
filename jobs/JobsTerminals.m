@@ -41,48 +41,157 @@ static NSCharacterSet* whitespaceCharset() {
     return whitespace;
 }
 
-@implementation AppleTerminal
+NSString* AppleTerminalTabDescriptionSubstring(id s) {
+    return [[s description] substringFromIndex:29];
+}
+
+@implementation AppleTerminal {
+    NSMutableDictionary* tabCwdMap;
+    NSMutableArray* tabCwdList;
+}
 @synthesize projectDir, workingDir;
-- (void)runCommand:(NSString*)cmd {
-	TerminalApplication *term = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
-    [term activate];
-    
+
+- (NSString*)cwdForTTY:(NSString*)tty {
     NSCharacterSet* whitespace = whitespaceCharset();
+    NSString* ttyNoDev = [tty stringByReplacingOccurrencesOfString:@"/dev/" withString:@""];
+    
+    NSString* psF = runTask(@"/bin/bash", NSHomeDirectory(), @[ @"-c", [NSString stringWithFormat:@"ps -f | grep bash | grep %@", ttyNoDev] ]);
+    
+    NSMutableArray* cols = [[psF componentsSeparatedByCharactersInSet:whitespace] mutableCopy];
+    [cols removeObject:@""];
+    if ([cols count] < 2) return nil;
+    
+    NSInteger pid = [cols[1] integerValue];
+    if (pid <= 0 || pid >= INT_MAX) return nil;
+    
+    NSString* lsofP = runTask(@"/bin/bash", NSHomeDirectory(), @[ @"-c", [NSString stringWithFormat:@"lsof -p %d | grep cwd", (int)pid] ]);
+    cols = [[lsofP componentsSeparatedByCharactersInSet:whitespace] mutableCopy];
+    [cols removeObject:@""];
+    
+    long N = (long)[cols count];
+    if (N <= 2) return nil;
+    
+    NSString* penultimate = cols[N-2];
+    NSRange range = [lsofP rangeOfString:penultimate];
+    
+    long M = (long)[lsofP length];
+    if (M <= 2) return nil;
+    NSString* cwd = [lsofP substringWithRange:NSMakeRange(NSMaxRange(range), [lsofP length] - NSMaxRange(range))];
+    cwd = [cwd stringByTrimmingCharactersInSet:whitespace];
+    return cwd;
+}
+
+/*
+NSString* tty = tab.tty;
+NSString* cwd = [tabCwdMap valueForKey:tty];
+if (!cwd) {
+    cwd = [self cwdForTTY:tty];
+    NSLog(@"UNSTORED cwd = %@ has %@", tty, cwd);
+    [tabCwdMap setValue:cwd ?: [NSNull null] forKey:tty];
+    [tabCwdList addObject:tty];
+}
+else {
+    NSLog(@"STORED cwd = %@ has %@", tty, cwd);
+}
+*/
+
+static BOOL isCaseInsensitiveEqual(NSString* a, NSString* b) {
+    if (a == b)
+        return YES;
+    if (!a || !b)
+        return NO;
+    return [a caseInsensitiveCompare:b] == 0;
+}
+- (NSArray*)tabForTerm:(TerminalApplication*)term directories:(NSArray*)dirs {
+    // TODO: currently we are searching self.projectDir and not dirs
+    
+    if (!tabCwdMap) tabCwdMap = [NSMutableDictionary dictionary];
+    if (!tabCwdList) tabCwdList = [NSMutableArray array];
+    
+    // Try to find an old tab with the given directory
+    for (TerminalWindow* win in term.windows) {
+        for (TerminalTab* tab in win.tabs) {
+            if (tab.busy) continue;
+            NSString* tty = tab.tty;
+            NSString* cwd = tabCwdMap[tty];
+            if (!cwd || cwd == (id)[NSNull null]) continue;
+            
+            if (isCaseInsensitiveEqual(cwd, self.projectDir)) {
+                NSLog(@"STORED cwd = %@ has %@", tty, cwd);
+                return @[ win, tab ];
+            }
+        }
+    }
+    
+    // Clear the caches, we didn't find anything and have to research.
+    tabCwdMap = [NSMutableDictionary dictionary];
+    tabCwdList = [NSMutableArray array];
     
     // Iterate over the windows and tabs
     for (TerminalWindow* win in term.windows) {
         for (TerminalTab* tab in win.tabs) {
-            
+            if (tab.busy) continue;
             NSString* tty = tab.tty;
-            NSString* ttyNoDev = [tty stringByReplacingOccurrencesOfString:@"/dev/" withString:@""];
+            NSString* cwd = [self cwdForTTY:tty];
+            NSLog(@"UNSTORED cwd = %@ has %@", tty, cwd);
+            [tabCwdMap setValue:cwd ?: [NSNull null] forKey:tty];
+            [tabCwdList addObject:tty];
             
-            NSString* psF = runTask(@"/bin/bash", NSHomeDirectory(), @[ @"-c", [NSString stringWithFormat:@"ps -f | grep bash | grep %@", ttyNoDev] ]);
-            
-            NSMutableArray* cols = [[psF componentsSeparatedByCharactersInSet:whitespace] mutableCopy];
-            [cols removeObject:@""];
-            if ([cols count] < 2) continue;
-            
-            NSInteger pid = [cols[1] integerValue];
-            if (pid <= 0 || pid >= INT_MAX) continue;
-            
-            NSString* lsofP = runTask(@"/bin/bash", NSHomeDirectory(), @[ @"-c", [NSString stringWithFormat:@"lsof -p %d | grep cwd", (int)pid] ]);
-            cols = [[lsofP componentsSeparatedByCharactersInSet:whitespace] mutableCopy];
-            [cols removeObject:@""];
-            
-            long N = (long)[cols count];
-            if (N <= 2) continue;
-            
-            NSString* penultimate = cols[N-2];
-            NSRange range = [lsofP rangeOfString:penultimate];
-            
-            long M = (long)[lsofP length];
-            if (M <= 2) continue;
-            NSString* cwd = [lsofP substringWithRange:NSMakeRange(NSMaxRange(range), [lsofP length] - NSMaxRange(range))];
-            cwd = [cwd stringByTrimmingCharactersInSet:whitespace];
-            NSLog(@"cwd = %@", cwd);
+            if (isCaseInsensitiveEqual(cwd, self.projectDir)) {
+                NSLog(@"STORED cwd = %@ has %@", tty, cwd);
+                return @[ win, tab ];
+            }
         }
     }
     
+    return nil;
+}
+
+static NSString* bashQuote(NSString* cmd) {
+    return [NSString stringWithFormat:@"'%@'", cmd];
+}
+- (void)runCommand:(NSString*)cmd {
+	TerminalApplication *term = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
+    [term activate];
+    
+    self.projectDir = [self.projectDir stringByExpandingTildeInPath];
+    self.projectDir = [self.projectDir stringByResolvingSymlinksInPath];
+    
+    self.workingDir = [self.workingDir stringByExpandingTildeInPath];
+    self.workingDir = [self.workingDir stringByResolvingSymlinksInPath];
+    
+    TerminalWindow* win = nil;
+    TerminalTab* tab = nil;
+    
+    NSArray* winAndTab = [self tabForTerm:term directories:nil];
+    if ([winAndTab count] == 2) {
+        win = winAndTab[0];
+        tab = winAndTab[1];
+    }
+    else {
+        cmd = [NSString stringWithFormat:@"cd %@ && %@", bashQuote(self.workingDir), cmd];
+    }
+    
+    TerminalTab* outTab = [term doScript:cmd in:tab];
+    outTab.selected = true;
+    
+    if (outTab != tab) {
+        BOOL isBroken = NO;
+        for (TerminalWindow* outWinCandidate in term.windows) {
+            for (TerminalTab* outTabCandidate in outWinCandidate.tabs) {
+                if (isCaseInsensitiveEqual(outTabCandidate.tty, outTab.tty)) {
+                    win = outWinCandidate;
+                    isBroken = YES;
+                    break;
+                }
+            }
+            if (isBroken)
+                break;
+        }
+    }
+    
+    win.frontmost = YES;
+//    NSLog(@"outtab = %@ %@, %d", outTab.tty, win, win.frontmost);
 //    TerminalTab* tab = [term doScript:cmd in:nil];
 //    tab.selected = true;
 }

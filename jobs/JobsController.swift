@@ -9,6 +9,6 @@ class JobsController: NSObject {
     @IBAction func cmdField(sender: NSTextField) {
         let cmd = cmdField.stringValue
         print(cmd)
-        JobsScheduler.shared.runCommand(cmd)
+        JobsScheduler.shared.runCommand(cmd, dirField.stringValue, dirField.stringValue)
     }
 }

@@ -28,7 +28,10 @@ class JobsScheduler: NSObject {
     override init() {
         self.preferedTerm = AppleTerminal()
     }
-    func runCommand(cmd: String) {
-        self.preferedTerm?.runCommand(cmd)
+    func runCommand(cmd: String, _ projectDir: String, _ workingDir: String) {
+        let term = self.preferedTerm
+        term?.projectDir = projectDir
+        term?.workingDir = workingDir
+        term?.runCommand(cmd)
     }
 }
